@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  cacheComponents:true,
+  cacheComponents: true,
   images: {
     remotePatterns: [
       {
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "kindhearted-cuttlefish-594.convex.cloud",
+        hostname: "polished-eel-473.convex.cloud",
         port: "",
       },
     ],
