@@ -4,13 +4,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import { Metadata } from "next";
-// import { cacheLife, cacheTag } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import { connection } from "next/server";
 import { Suspense } from "react";
-
-// export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Blog | Next.js 16 Tutorial",
@@ -31,23 +28,17 @@ const BlogPage = () => {
         </p>
       </div>
       <Suspense fallback={<SkeletonLoadingUi />}>
-      <BlogList />
+        <BlogList />
       </Suspense>
     </div>
   );
 };
 export default BlogPage;
 
-/* async function delay_2s() {
-   await new Promise((resolve) => setTimeout(resolve, 2000));
- } */
-
 async function BlogList() {
-  // await delay_2s();
-  /* "use cache";
+  "use cache";
   cacheLife("hours");
-  cacheTag("blog"); */
-  await connection();
+  cacheTag("blog");
   const data = await fetchQuery(api.posts.getPosts);
   return (
     <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-3">
