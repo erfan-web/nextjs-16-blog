@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import { Metadata } from "next";
-import { cacheTag } from "next/cache";
+// import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
@@ -30,23 +30,24 @@ const BlogPage = () => {
           Insigts, thoughs and trends from our team!
         </p>
       </div>
-      {/* <Suspense fallback={<SkeletonLoadingUi />}> */}
-        <BlogList />
-      {/* </Suspense> */}
+      <Suspense fallback={<SkeletonLoadingUi />}>
+      <BlogList />
+      </Suspense>
     </div>
   );
 };
 export default BlogPage;
 
-async function delay_2s() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-}
+/* async function delay_2s() {
+   await new Promise((resolve) => setTimeout(resolve, 2000));
+ } */
 
 async function BlogList() {
   // await delay_2s();
-  // await connection();
-  'use cache'
-  cacheTag("blog")
+  /* "use cache";
+  cacheLife("hours");
+  cacheTag("blog"); */
+  await connection();
   const data = await fetchQuery(api.posts.getPosts);
   return (
     <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-3">
